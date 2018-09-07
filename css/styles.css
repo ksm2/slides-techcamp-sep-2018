@@ -1560,3 +1560,31 @@ based on dark.css by Ivan Sagalaev
   color: inherit;
   font-size: 1.8rem;
   margin: 0 1.5rem; }
+
+.reveal .whatwg {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
+  -ms-flex-pack: center;
+      justify-content: center; }
+  .reveal .whatwg h2, .reveal .whatwg p.subtitle {
+    color: #3c790a;
+    text-align: left;
+    margin: 0; }
+  .reveal .whatwg .whatwg-title {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column nowrap;
+        flex-flow: column nowrap;
+    -ms-flex-pack: center;
+        justify-content: center; }
+  .reveal .whatwg .whatwg-logo {
+    display: inline-block;
+    vertical-align: -3.5rem;
+    margin: 0 1rem 0 0;
+    width: 10rem;
+    border: none;
+    max-width: 100%;
+    box-shadow: none;
+    background: none; }

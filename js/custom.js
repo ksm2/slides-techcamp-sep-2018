@@ -15,8 +15,6 @@ function shootingStar(el, delay) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('Hallo Welt')
-
   document.querySelectorAll('.shooting-star').forEach((element) => {
     shootingStar(element, 1000 + Math.floor(Math.random() * 5000))
   })
