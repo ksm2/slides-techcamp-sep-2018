@@ -11,3 +11,8 @@ css/*.min.css
 js/*.min.js
 demo.html
 plugin/**/example.*
+
+# Font Awesome
+lib/fontawesome/*
+!lib/fontawesome/css/all.min.css
+!lib/fontawesome/webfonts/fa-brands-*
