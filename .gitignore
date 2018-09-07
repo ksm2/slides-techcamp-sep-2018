@@ -10,3 +10,4 @@ package-lock.json
 css/*.min.css
 js/*.min.js
 demo.html
+plugin/**/example.*
