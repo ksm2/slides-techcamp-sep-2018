@@ -1615,3 +1615,6 @@ based on dark.css by Ivan Sagalaev
     max-width: 100%;
     box-shadow: none;
     background: none; }
+
+.reveal .hljs.hljs-19 {
+  max-height: 438px; }
