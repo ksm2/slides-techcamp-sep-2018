@@ -3,3 +3,17 @@
 @import "reveal";
 @import "shooting-star";
 @import "highlight";
+
+.reveal {
+  p.subtitle {
+    color: #808080;
+    font-weight: bold;
+    margin: 3rem 0;
+  }
+
+  a.social-profile {
+    color: inherit;
+    font-size: 1.8rem;
+    margin: 0 1.5rem;
+  }
+}

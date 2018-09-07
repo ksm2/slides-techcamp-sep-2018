@@ -21,10 +21,6 @@ section.has-dark-background::before {
   background: url(/images/stars.png);
   opacity: .2; }
 
-p.subtitle {
-  color: #808080;
-  font-weight: bold; }
-
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
