@@ -217,7 +217,27 @@ const rs = new ReadableStream({
       <h2>Writing Streams to a Sink</h2>
 
       <section>
+        <p>Writable Streams</p>
+        <pre><code class="hljs" data-trim>
+const ws = new WritableStream({
+  /* Is called when the user starts writing to the stream */
+  async start(ctrl: WritableStreamDefaultController): Promise&lt;void&gt; {}
+  /* Is called when the user sends a new chunk */
+  async write(chunk: any, ctrl: WritableStreamDefaultController): Promise&lt;void&gt; {}
+  /* Is called when the user is done writing */
+  async close(ctrl: WritableStreamDefaultController): Promise&lt;void&gt; {}
+  /* Is called when the user aborts to write */
+  async abort(reason: any): Promise&lt;void&gt; {}
+})
+        </code></pre>
+      </section>
+
+      <section>
         <p>Using <code>pipeTo</code></p>
+        <pre><code class="hljs" data-trim>
+async function examplePipeTo() {
+}
+        </code></pre>
       </section>
 
       <section>
@@ -253,7 +273,40 @@ const rs = new ReadableStream({
       <h2>Transforming Streams with Pipes</h2>
 
       <section>
+        <p>Transform Streams</p>
+        <pre><code class="hljs" data-trim>
+const ts = new TransformStream({
+  /* Is called when the user starts to transform */
+  start(ctrl: TransformStreamDefaultController): Promise&lt;void&gt;
+  /* Is called when a new chunk is sent to be transformed */
+  transform(chunk: any, ctrl: TransformStreamDefaultController): Promise&lt;void&gt;
+  /* Is called when all chunks have been sent and we have to finish */
+  flush(ctrl: TransformStreamDefaultController): Promise&lt;void&gt;
+})
+        </code></pre>
+      </section>
+
+      <section>
         <p>Using <code>pipeThrough</code></p>
+        <pre><code class="hljs" data-trim>
+async function examplePipeThrough() {
+}
+        </code></pre>
+      </section>
+
+      <section>
+        <p>Identity Transform Streams</p>
+        <pre><code class="hljs" data-trim>
+async function fetchUploadStreamed() {
+  const { writable, readable } = new TransformStream()
+  const response = await fetch("...", { body: readable })
+  /* ... */
+
+  const writer = writable.getWriter()
+  writer.write(new Uint8Array([0x73, 0x74, 0x72, 0x65, 0x61, 0x6D, 0x73, 0x21]))
+  writer.close()
+}
+        </code></pre>
       </section>
 
       <section>
@@ -316,8 +369,8 @@ const rs = new ReadableStream({
         src: 'plugin/highlight/highlight.js', async: true, callback: function () {
           const js = hljs.getLanguage('js')
           js.k.keyword = `${js.k.keyword} any`
-          js.k.built_in = `${js.k.built_in} fetch ReadableStream ReadableStreamDefaultController WritableStream TransformStream`
-          js.k.param = `url done value reader ctrl reason next rs ws ts response iterator byteArray err`
+          js.k.built_in = `${js.k.built_in} fetch ReadableStream ReadableStreamDefaultController WritableStream WritableStreamDefaultController TransformStream TransformStreamDefaultController`
+          js.k.param = `url done value reader ctrl chunk reason next rs ws ts response iterator byteArray err`
 
           hljs.initHighlightingOnLoad()
         },
