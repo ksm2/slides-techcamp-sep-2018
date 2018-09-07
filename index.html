@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>reveal.js</title>
+
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/baqend.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="css/highlight.css">
+  <link rel="stylesheet" href="css/shooting-star.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link')
+    link.rel = 'stylesheet'
+    link.type = 'text/css'
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css'
+    document.getElementsByTagName('head')[0].appendChild(link)
+  </script>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+    <section>
+      <h1>Enhancing Data Processing in Browsers Using Streams</h1>
+      <video data-autoplay loop>
+        <source src="videos/carrierbelt.webm" type="video/webm"/>
+      </video>
+      <p class="subtitle">How browsers can handle big data today</p>
+
+      <span>github.com/ksm2</span>
+      <span>twitter.com/k_moellers</span>
+    </section>
+
+    <section data-background="#162939">
+      <h2>$ whoami</h2>
+      <p>Konstantin Möllers<br>
+        Performance Engineer @ Baqend<br>
+        Master of Science @ Uni Hamburg<br>
+        Professional working experience for 6 years</p>
+      <div class="shooting-star shooting-star-left"><img src="/images/shooting-star.png"></div>
+      <div class="shooting-star shooting-star-right"><img src="/images/shooting-star.png"></div>
+      <div class="shooting-star shooting-star-left"><img src="/images/shooting-star.png"></div>
+      <div class="shooting-star shooting-star-right"><img src="/images/shooting-star.png"></div>
+      <div class="shooting-star shooting-star-left"><img src="/images/shooting-star.png"></div>
+      <div class="shooting-star shooting-star-right"><img src="/images/shooting-star.png"></div>
+    </section>
+
+    <section>
+      <h2>Streams API</h2>
+      <p>WHATWG Living Standard</p>
+      <p>https://streams.spec.whatwg.org/</p>
+    </section>
+
+    <section>
+      <h2>Reading a Stream</h2>
+
+      <section>
+        <ul>
+          <li class="fragment">a simple, <code>Promise</code>-based API</li>
+          <li class="fragment">blocks others from reading</li>
+          <li class="fragment">blocks others from reading</li>
+        </ul>
+      </section>
+
+      <section>
+        Using <code>Promise</code> chains of ES2015
+        <pre><code class="hljs" data-trim data-noescape>
+function consumeStreamWithPromiseChains(url) {
+  return fetch(url)                  // Fetch a URL
+    .then(response => response.body) // Stream the body
+    .then(rs => rs.getReader())      // Get a lock on the stream
+    .then(reader => reader.read().then(next => consume(reader, next)))
+}
+
+function consume(reader, { done, value }) {
+  // Exit if we're done and unlock the stream
+  if (done) {
+    reader.releaseLock()
+    return
+  }
+  console.log(value /* is a Uint8Array */) // Do something with it
+  // Wait for the next chunk and consume it
+  return reader.read().then(next => consume(reader, next))
+}
+						</code></pre>
+      </section>
+
+      <section>
+        Using <code>async</code> and <code>await</code> of ES2017
+        <pre><code class="hljs" data-trim>
+async function consumeStreamAsyncAwait(url) {
+  const response = await fetch(url) // Fetch a URL
+  const rs = response.body          // Stream the body
+  const reader = rs.getReader()     // Get a lock on the stream
+
+  while (true) {
+    // Await more data and return if we are done reading
+    const { done, value } = await reader.read()
+    if (done) break
+
+    // Do something with the data
+    console.log(value)
+  }
+
+  // Unlock the stream
+  reader.releaseLock()
+}
+						</code></pre>
+      </section>
+
+      <section>
+        Using <code>AsyncIterator</code> of ES2018
+        <pre><code class="hljs" data-trim>
+async function consumeStreamAsyncIterator(url) {
+  const response = await fetch(url)         // Fetch a URL
+  const rs = response.body                  // Stream the body
+  const iterator = streamAsyncIterator(rs)  // Lock and create iterator
+
+  // Await more data while iterating
+  for await (const byteArray of iterator) {
+    // Do something with the data
+    console.log(byteArray)
+  }
+}
+        </code></pre>
+      </section>
+
+      <section>
+        Implementation of <code>streamAsyncIterator</code>
+        <pre><code class="hljs" data-trim>
+async function* streamAsyncIterator(rs) {
+  // Get a lock on the stream
+  const reader = rs.getReader()
+  try {
+    while (true) {
+      // Read from the stream and exit if we're done
+      const { done, value } = await reader.read()
+      if (done) return
+      // Else yield the chunk
+      yield value
+    }
+  }
+  finally {
+    // Unlock the stream
+    reader.releaseLock()
+  }
+}
+        </code></pre>
+      </section>
+    </section>
+
+    <section>
+      <h2>Creating a Readable Stream</h2>
+      <pre><code class="hljs" data-trim>
+const rs = new ReadableStream({
+  /* Is called when the consumer locks the stream */
+  async start(ctrl: ReadableStreamDefaultController): Promise&lt;void&gt; {
+    try {
+      ctrl.enqueue(chunk)  // Enqueue a new chunk in the stream
+      ctrl.close()         // Tell the consumer we have sent all chunks
+    } catch (err) {
+      ctrl.error(err)      // Forward-propagate an error
+    }
+  },
+
+  /* Is called when the consumer waits for data */
+  async pull(ctrl: ReadableStreamDefaultController): Promise&lt;void&gt; {},
+
+  /* Handle back-propagated errors */
+  async cancel(reason: any): Promise&lt;void&gt; {},
+})
+      </code></pre>
+    </section>
+
+    <section>
+      <h2>Writing Streams to a Sink</h2>
+    </section>
+
+    <section>
+      <h2>Transforming Streams with Pipes</h2>
+    </section>
+  </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+<script src="js/custom.js"></script>
+
+<script>
+  // More info about config & dependencies:
+  // - https://github.com/hakimel/reveal.js#configuration
+  // - https://github.com/hakimel/reveal.js#dependencies
+  Reveal.initialize({
+    history: true,
+    dependencies: [
+      { src: 'plugin/markdown/marked.js' },
+      { src: 'plugin/markdown/markdown.js' },
+      { src: 'plugin/notes/notes.js', async: true },
+      {
+        src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+          const js = hljs.getLanguage('js')
+          js.k.keyword = `${js.k.keyword} any`
+          js.k.built_in = `${js.k.built_in} fetch ReadableStream ReadableStreamDefaultController WritableStream TransformStream`
+          js.k.param = `url done value reader ctrl reason next rs ws ts response iterator byteArray err`
+
+          hljs.initHighlightingOnLoad()
+        },
+      },
+    ],
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+/**
+ * Baqend theme for reveal.js. This is an adjustment of the 'white' theme.
+ *
+ * By Konstantin Simon Maria Möllers
+ */
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+// Include theme-specific fonts
+@import url(../../lib/font/open-sans/open-sans.css);
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: #fff;
+
+$mainColor: #333;
+$headingColor: #f27354;
+
+$mainFontSize: 36px;
+$mainFont: 'Open Sans', Helvetica, sans-serif;
+$headingFont: 'Open Sans', Helvetica, sans-serif;
+$codeFont: 'Source Code Pro', monospace;
+$headingTextShadow: none;
+$headingLetterSpacing: none;
+$headingTextTransform: none;
+$headingFontWeight: 600;
+$linkColor: #f27354;
+$linkColorHover: lighten($linkColor, 15%);
+$selectionBackgroundColor: lighten($linkColor, 25%);
+
+$heading1Size: 1.8em;
+$heading2Size: 1.6em;
+$heading3Size: 1.3em;
+$heading4Size: 1.0em;
+
+section.has-dark-background {
+  & {
+    color: #e8e8e8;
+    text-align: left;
+  }
+
+  &::before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
+    background: url(/images/stars.png);
+    opacity: .2;
+  }
+}
+
+p.subtitle {
+  color: #808080;
+  font-weight: bold;
+}
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+.reveal code {
+  font-family: $codeFont;
+  text-transform: none;
+  color: #f27354;
+  border-radius: 0.25rem;
+  background: #f3f3f3;
+  padding: 0 0.25rem;
+  font-weight: 600;
+}
