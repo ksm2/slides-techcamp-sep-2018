@@ -1551,6 +1551,33 @@ based on dark.css by Ivan Sagalaev
 .hljs-strong {
   font-weight: bold; }
 
+.browser-compat {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  margin: 3rem 0 !important; }
+  .browser-compat img {
+    width: 9rem;
+    height: 9rem;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important; }
+  .browser-compat .browser-support,
+  .browser-compat .browser-no-support {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column nowrap;
+        flex-flow: column nowrap;
+    margin: 0 1rem; }
+  .browser-compat .browser-no-support img {
+    filter: grayscale(90%);
+    opacity: 0.5; }
+
 .reveal p.subtitle {
   color: #808080;
   font-weight: bold;

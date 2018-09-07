@@ -68,9 +68,8 @@
 
       <section>
         <ul>
-          <li class="fragment">a simple, <code>Promise</code>-based API</li>
-          <li class="fragment">blocks others from reading</li>
-          <li class="fragment">blocks others from reading</li>
+          <li>a simple, <code>Promise</code>-based API</li>
+          <li>blocks others from reading</li>
         </ul>
       </section>
 
@@ -159,6 +158,36 @@ async function* streamAsyncIterator(rs) {
 }
         </code></pre>
       </section>
+
+      <section>
+        <div class="browser-compat">
+          <div class="browser-support">
+            <img src="images/browsers/google-chrome.svg">
+            <span class="version">43+</span>
+          </div>
+          <div class="browser-support">
+            <img src="images/browsers/mozilla-firefox.svg">
+            <span class="version"><i class="fas fa-flag"></i></span>
+          </div>
+          <div class="browser-support">
+            <img src="images/browsers/microsoft-edge.svg">
+            <span class="version">16+</span>
+          </div>
+          <div class="browser-support">
+            <img src="images/browsers/opera.svg">
+            <span class="version">30+</span>
+          </div>
+          <div class="browser-support">
+            <img src="images/browsers/apple-safari.png">
+            <span class="version">10+</span>
+          </div>
+        </div>
+        <p hidden>
+          <small>https://www.chromestatus.com/feature/5804334163951616</small>
+          <small>https://developer.microsoft.com/en-us/microsoft-edge/platform/status/streamsapireadablestream/</small>
+          <small>https://webkit.org/status/#feature-readable-streams</small>
+        </p>
+      </section>
     </section>
 
     <section>
@@ -186,10 +215,72 @@ const rs = new ReadableStream({
 
     <section>
       <h2>Writing Streams to a Sink</h2>
+
+      <section>
+        <p>Using <code>pipeTo</code></p>
+      </section>
+
+      <section>
+        <div class="browser-compat">
+          <div class="browser-support">
+            <img src="images/browsers/google-chrome.svg">
+            <span class="version">59+</span>
+          </div>
+          <div class="browser-no-support">
+            <img src="images/browsers/mozilla-firefox.svg">
+          </div>
+          <div class="browser-support">
+            <img src="images/browsers/microsoft-edge.svg">
+            <span class="version">16+</span>
+          </div>
+          <div class="browser-support">
+            <img src="images/browsers/opera.svg">
+            <span class="version">46+</span>
+          </div>
+          <div class="browser-no-support">
+            <img src="images/browsers/apple-safari.png">
+          </div>
+        </div>
+        <p hidden>
+          <small>https://www.chromestatus.com/feature/5928498656968704</small>
+          <small>https://developer.microsoft.com/en-us/microsoft-edge/platform/status/streamsapiwritablestream/</small>
+        </p>
+      </section>
+
     </section>
 
     <section>
       <h2>Transforming Streams with Pipes</h2>
+
+      <section>
+        <p>Using <code>pipeThrough</code></p>
+      </section>
+
+      <section>
+        <div class="browser-compat">
+          <div class="browser-support">
+            <img src="images/browsers/google-chrome.svg">
+            <span class="version">67+</span>
+          </div>
+          <div class="browser-no-support">
+            <img src="images/browsers/mozilla-firefox.svg">
+            <span class="version"></span>
+          </div>
+          <div class="browser-no-support">
+            <img src="images/browsers/microsoft-edge.svg">
+          </div>
+          <div class="browser-support">
+            <img src="images/browsers/opera.svg">
+            <span class="version">54+</span>
+          </div>
+          <div class="browser-no-support">
+            <img src="images/browsers/apple-safari.png">
+          </div>
+        </div>
+        <p hidden>
+          <small>https://www.chromestatus.com/feature/5466425791610880</small>
+        </p>
+      </section>
     </section>
 
     <section>

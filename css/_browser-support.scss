@@ -1,0 +1,28 @@
+.browser-compat {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin: 3rem 0 !important;
+
+  img {
+    width: 9rem;
+    height: 9rem;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .browser-support,
+  .browser-no-support {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 0 1rem;
+  }
+
+  .browser-no-support img {
+    filter: grayscale(90%);
+    opacity: 0.5;
+  }
+}
