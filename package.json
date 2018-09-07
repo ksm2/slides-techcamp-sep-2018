@@ -12,9 +12,9 @@
     "build": "grunt"
   },
   "author": {
-    "name": "Hakim El Hattab",
-    "email": "hakim.elhattab@gmail.com",
-    "web": "http://hakim.se"
+    "name": "Konstantin S. M. Möllers",
+    "email": "ksm.moellers@gmail.com",
+    "web": "https://moellers.systems/"
   },
   "repository": {
     "type": "git",
