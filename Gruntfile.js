@@ -35,9 +35,9 @@ module.exports = function(grunt) {
 		},
 
 		sass: {
-			core: {
-				src: 'css/reveal.scss',
-				dest: 'css/reveal.css'
+			index: {
+				src: 'css/index.scss',
+				dest: 'css/styles.css'
 			},
 			themes: {
 				expand: true,
@@ -50,7 +50,7 @@ module.exports = function(grunt) {
 
 		autoprefixer: {
 			core: {
-				src: 'css/reveal.css'
+				src: 'css/styles.css'
 			}
 		},
 
@@ -59,8 +59,8 @@ module.exports = function(grunt) {
 				compatibility: 'ie9'
 			},
 			compress: {
-				src: 'css/reveal.css',
-				dest: 'css/reveal.min.css'
+				src: 'css/styles.css',
+				dest: 'css/styles.min.css'
 			}
 		},
 
@@ -120,7 +120,7 @@ module.exports = function(grunt) {
 
 		watch: {
 			js: {
-				files: [ 'Gruntfile.js', 'js/reveal.js' ],
+				files: [ 'Gruntfile.js', 'js/*.js' ],
 				tasks: 'js'
 			},
 			theme: {
@@ -133,8 +133,8 @@ module.exports = function(grunt) {
 				tasks: 'css-themes'
 			},
 			css: {
-				files: [ 'css/reveal.scss' ],
-				tasks: 'css-core'
+				files: [ 'css/*.scss' ],
+				tasks: 'css-index'
 			},
 			html: {
 				files: root.map(path => path + '/*.html')
@@ -176,7 +176,7 @@ module.exports = function(grunt) {
 	grunt.registerTask( 'css-themes', [ 'sass:themes' ] );
 
 	// Core framework CSS
-	grunt.registerTask( 'css-core', [ 'sass:core', 'autoprefixer', 'cssmin' ] );
+	grunt.registerTask( 'css-index', [ 'sass:index', 'autoprefixer', 'cssmin' ] );
 
 	// All CSS
 	grunt.registerTask( 'css', [ 'sass', 'autoprefixer', 'cssmin' ] );
