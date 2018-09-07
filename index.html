@@ -221,13 +221,17 @@ const rs = new ReadableStream({
         <pre><code class="hljs" data-trim>
 const ws = new WritableStream({
   /* Is called when the user starts writing to the stream */
-  async start(ctrl: WritableStreamDefaultController): Promise&lt;void&gt; {}
+  start(ctrl: WritableStreamDefaultController): Promise&lt;void&gt; {},
+
   /* Is called when the user sends a new chunk */
-  async write(chunk: any, ctrl: WritableStreamDefaultController): Promise&lt;void&gt; {}
+  write(chunk: any,
+        ctrl: WritableStreamDefaultController): Promise&lt;void&gt; {},
+
   /* Is called when the user is done writing */
-  async close(ctrl: WritableStreamDefaultController): Promise&lt;void&gt; {}
+  close(ctrl: WritableStreamDefaultController): Promise&lt;void&gt; {},
+
   /* Is called when the user aborts to write */
-  async abort(reason: any): Promise&lt;void&gt; {}
+  abort(reason: any): Promise&lt;void&gt; {},
 })
         </code></pre>
       </section>
@@ -258,7 +262,7 @@ function makeWritableWebSocketStream(url, protocols) {
       </section>
 
       <section>
-        <p>Using <code>pipeTo</code></p>
+        <p>Using <code>pipeTo</code> with Writable Streams</p>
         <pre><code class="hljs" data-trim>
 async function examplePipingTo() {
   // Create a writable stream to a WebSocket
@@ -309,17 +313,20 @@ async function examplePipingTo() {
         <pre><code class="hljs hljs-19" data-trim>
 const ts = new TransformStream({
   /* Is called when the user starts to transform */
-  start(ctrl: TransformStreamDefaultController): Promise&lt;void&gt;
+  start(ctrl: TransformStreamDefaultController): Promise&lt;void&gt; {},
+
   /* Is called when a new chunk is sent to be transformed */
-  transform(chunk: any, ctrl: TransformStreamDefaultController): Promise&lt;void&gt;
+  transform(chunk: any,
+            ctrl: TransformStreamDefaultController): Promise&lt;void&gt; {},
+
   /* Is called when all chunks have been sent and we have to finish */
-  flush(ctrl: TransformStreamDefaultController): Promise&lt;void&gt;
+  flush(ctrl: TransformStreamDefaultController): Promise&lt;void&gt; {},
 })
         </code></pre>
       </section>
 
       <section>
-        <p>Using <code>pipeThrough</code></p>
+        <p>Using <code>pipeThrough</code> with Transform Streams</p>
         <pre><code class="hljs" data-trim>
 async function examplePipeThrough() {
 }
@@ -327,15 +334,19 @@ async function examplePipeThrough() {
       </section>
 
       <section>
-        <p>Identity Transform Streams</p>
+        <p>Using Identity Transform Streams</p>
         <pre><code class="hljs" data-trim>
-async function fetchUploadStreamed() {
+function fetchUploadStreamed() {
+  // Create an identity transform stream and get its
+  // readable and writable streams
   const { writable, readable } = new TransformStream()
-  const response = await fetch("...", { body: readable })
-  /* ... */
 
+  // Link the uploaded body with the readable stream
+  fetch('...', { body: readable }).then(response => /* ... */)
+
+  // Lock the writer of the writable stream and write data to it
   const writer = writable.getWriter()
-  writer.write(new Uint8Array([0x73, 0x74, 0x72, 0x65, 0x61, 0x6D, 0x73, 0x21]))
+  writer.write(new Uint8Array([0x73, 0x74, 0x72, 0x65, /* ... */]))
   writer.close()
 }
         </code></pre>
@@ -402,7 +413,7 @@ async function fetchUploadStreamed() {
           const js = hljs.getLanguage('js')
           js.k.keyword = `${js.k.keyword} any`
           js.k.built_in = `${js.k.built_in} fetch WebSocket ReadableStream ReadableStreamDefaultController WritableStream WritableStreamDefaultController TransformStream TransformStreamDefaultController`
-          js.k.param = `url protocols resolve reject code reasonString done value reader ctrl chunk reason next rs ws ts response iterator byteArray err socket`
+          js.k.param = `url protocols resolve reject code reasonString done value reader writer readable writable ctrl chunk reason next rs ws ts response iterator byteArray err socket`
 
           hljs.initHighlightingOnLoad()
         },
