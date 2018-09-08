@@ -5,11 +5,11 @@
  * By Konstantin Simon Maria Möllers
  */
 @import url(../../lib/font/open-sans/open-sans.css);
-section.has-dark-background {
+.reveal.has-dark-background section {
   color: #e8e8e8;
   text-align: left; }
 
-section.has-dark-background::before {
+.reveal.has-dark-background .slide-background.present::before {
   content: ' ';
   position: absolute;
   top: 0;

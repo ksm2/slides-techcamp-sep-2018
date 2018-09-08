@@ -33,13 +33,13 @@ $heading2Size: 1.6em;
 $heading3Size: 1.3em;
 $heading4Size: 1.0em;
 
-section.has-dark-background {
-  & {
+.reveal.has-dark-background {
+  section {
     color: #e8e8e8;
     text-align: left;
   }
 
-  &::before {
+  .slide-background.present::before {
     content: ' ';
     position: absolute;
     top: 0;
