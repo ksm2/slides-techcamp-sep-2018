@@ -60,19 +60,40 @@
         </div>
       </div>
 
-      <video data-autoplay loop>
-        <source src="videos/carrierbelt.webm" type="video/webm"/>
-      </video>
+      <section>
+        <video data-autoplay loop>
+          <source src="videos/carrierbelt.webm" type="video/webm"/>
+        </video>
 
-      <p><a href="https://streams.spec.whatwg.org/" target="_blank" rel="nofollow">https://streams.spec.whatwg.org/</a></p>
-    </section>
-
-    <section>
-      <h2>Reading a Stream</h2>
+        <p><a href="https://streams.spec.whatwg.org/" target="_blank" rel="nofollow">https://streams.spec.whatwg.org/</a></p>
+      </section>
 
       <section>
         <ul>
-          <li>a simple, <code>Promise</code>-based API</li>
+          <li>Reading Data</li>
+          <li>Writing Data</li>
+          <li>Transforming Data</li>
+        </ul>
+      </section>
+    </section>
+
+    <section>
+      <h2>Reading from Streams</h2>
+
+      <section>
+        <div class="pipe-label pipe-label-center fragment"><code>ReadableStream</code></div>
+        <div class="pipe-label pipe-label-left fragment">Underlying Source</div>
+        <div class="pipe readable-pipe"><span class="fragment">Reader</span></div>
+        <video data-autoplay loop>
+          <source src="videos/readablestream.webm" type="video/webm"/>
+        </video>
+      </section>
+
+      <section>
+        <ul>
+          <li>integrated into Fetch API</li>
+          <li><code>ReadableStream</code> interface</li>
+          <li>simple, <code>Promise</code>-based API</li>
           <li>blocks others from reading</li>
         </ul>
       </section>
@@ -217,8 +238,18 @@ const rs = new ReadableStream({
       </code></pre>
     </section>
 
+    <!-- Writing to Streams -->
     <section>
-      <h2>Writing Streams to a Sink</h2>
+      <h2>Writing to Streams</h2>
+
+      <section>
+        <div class="pipe-label pipe-label-center fragment"><code>WritableStream</code></div>
+        <div class="pipe-label pipe-label-right fragment">Underlying Sink</div>
+        <div class="pipe writable-pipe"><span class="fragment">Writer</span></div>
+        <video data-autoplay loop>
+          <source src="videos/writablestream.webm" type="video/webm"/>
+        </video>
+      </section>
 
       <section>
         <p>Writable Streams</p>
@@ -309,8 +340,19 @@ async function examplePipingTo() {
 
     </section>
 
+    <!-- Transforming Streams with Pipes -->
     <section>
       <h2>Transforming Streams with Pipes</h2>
+
+      <section>
+        <div class="pipe-label pipe-label-left fragment"><code>WritableStream</code></div>
+        <div class="pipe-label pipe-label-right fragment"><code>ReadableStream</code></div>
+        <div class="pipe transform-pipe fragment"><span class="">Transformer</span></div>
+        <div class="pipe-label pipe-label-center fragment"><code>TransformStream</code></div>
+        <video data-autoplay loop>
+          <source src="videos/transformstream.webm" type="video/webm"/>
+        </video>
+      </section>
 
       <section>
         <p>Transform Streams</p>

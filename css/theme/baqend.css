@@ -294,3 +294,6 @@ body {
   background: #f3f3f3;
   padding: 0 0.25rem;
   font-weight: 600; }
+
+.reveal li {
+  line-height: 1.5; }

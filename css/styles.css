@@ -1578,6 +1578,76 @@ based on dark.css by Ivan Sagalaev
     filter: grayscale(90%);
     opacity: 0.5; }
 
+.pipe-label, .pipe {
+  font-size: 1.5rem !important; }
+
+.pipe {
+  height: 5rem;
+  line-height: 5rem !important;
+  background: linear-gradient(to bottom, #f9c1b3, #ee4c25);
+  position: absolute;
+  width: 10rem;
+  top: 3rem;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }
+  .pipe.readable-pipe {
+    right: 0;
+    padding-left: 1rem; }
+    .pipe.readable-pipe:before {
+      content: ' ';
+      background: linear-gradient(to bottom, #f69a83, #d03610);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      position: absolute;
+      height: 7rem;
+      width: 1rem;
+      left: 0;
+      top: -1rem; }
+  .pipe.writable-pipe {
+    left: 0;
+    padding-right: 1rem; }
+    .pipe.writable-pipe:before {
+      content: ' ';
+      background: linear-gradient(to bottom, #f69a83, #d03610);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      position: absolute;
+      height: 7rem;
+      width: 1rem;
+      right: 0;
+      top: -1rem; }
+  .pipe.transform-pipe {
+    left: calc(50% - 6rem);
+    padding-left: 1rem;
+    padding-right: 1rem; }
+    .pipe.transform-pipe:before {
+      content: ' ';
+      background: linear-gradient(to bottom, #f69a83, #d03610);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      position: absolute;
+      height: 7rem;
+      width: 1rem;
+      left: 0;
+      top: -1rem; }
+    .pipe.transform-pipe:after {
+      content: ' ';
+      background: linear-gradient(to bottom, #f69a83, #d03610);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      position: absolute;
+      height: 7rem;
+      width: 1rem;
+      right: 0;
+      top: -1rem; }
+
+.pipe-label {
+  position: absolute;
+  top: 0.5rem; }
+  .pipe-label.pipe-label-center {
+    top: 13rem;
+    left: calc(50% - 20rem);
+    width: 40rem; }
+  .pipe-label.pipe-label-left {
+    left: 7rem; }
+  .pipe-label.pipe-label-right {
+    right: 7rem; }
+
 .reveal p.subtitle {
   color: #808080;
   font-weight: bold;
@@ -1620,7 +1690,7 @@ based on dark.css by Ivan Sagalaev
     background: none; }
 
 .reveal .hljs.hljs-19 {
-  max-height: 438px; }
+  max-height: 442px; }
 
 .reveal .techcamp-logo {
   border: none;
