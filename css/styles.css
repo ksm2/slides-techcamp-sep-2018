@@ -1586,8 +1586,8 @@ based on dark.css by Ivan Sagalaev
   line-height: 5rem !important;
   background: linear-gradient(to bottom, #f9c1b3, #ee4c25);
   position: absolute;
-  width: 10rem;
-  top: 3rem;
+  width: 11rem;
+  top: calc(50% - 4rem);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }
   .pipe.readable-pipe {
     right: 0;
@@ -1614,7 +1614,7 @@ based on dark.css by Ivan Sagalaev
       right: 0;
       top: -1rem; }
   .pipe.transform-pipe {
-    left: calc(50% - 6rem);
+    left: calc(50% - 6.5rem);
     padding-left: 1rem;
     padding-right: 1rem; }
     .pipe.transform-pipe:before {
@@ -1640,7 +1640,7 @@ based on dark.css by Ivan Sagalaev
   position: absolute;
   top: 0.5rem; }
   .pipe-label.pipe-label-center {
-    top: 13rem;
+    top: calc(51% + 6.5rem);
     left: calc(50% - 20rem);
     width: 40rem; }
   .pipe-label.pipe-label-left {
@@ -1689,8 +1689,8 @@ based on dark.css by Ivan Sagalaev
     box-shadow: none;
     background: none; }
 
-.reveal .hljs.hljs-19 {
-  max-height: 442px; }
+.reveal .hljs {
+  max-height: none !important; }
 
 .reveal .techcamp-logo {
   border: none;

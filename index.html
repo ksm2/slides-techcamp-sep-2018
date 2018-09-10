@@ -179,9 +179,9 @@ async function consumeStreamAsyncIterator(url) {
   const iterator = streamAsyncIterator(rs)  // Lock and create iterator
 
   // Await more data while iterating
-  for await (const byteArray of iterator) {
+  for await (const value of iterator) {
     // Do something with the data
-    console.log(byteArray)
+    console.log(value)
   }
 }
         </code></pre>
@@ -323,7 +323,7 @@ function makeWritableWebSocketStream(url, protocols) {
     close() {       // Close the socket when closing the stream
       return new Promise((resolve) => {
         socket.onclose = () => resolve()
-        socket.close(code)
+        socket.close(1000)
       })
     },
   })
@@ -449,8 +449,8 @@ async function examplePipeThrough() {
   const response = await fetch('...')
   const readableStream = response.body
 
-  // Pipe it trough our transform stream
-  const byteStream = readableStream.pipeTrough(transformStream)
+  // Pipe it through our transform stream
+  const byteStream = readableStream.pipeThrough(transformStream)
 
   /* ... */
 }
@@ -495,8 +495,8 @@ async function exampleTextDecoding() {
   const response = await fetch('...')
   const readableStream = response.body
 
-  // Pipe it trough our transform stream
-  const stringStream = readableStream.pipeTrough(transformStream)
+  // Pipe it through our transform stream
+  const stringStream = readableStream.pipeThrough(transformStream)
 
   /* ... */
 }
@@ -508,8 +508,8 @@ async function exampleTextDecoding() {
     <section data-background="images/factory.jpg" class="factory-background">
       <h2>Enabled Use Cases</h2>
       <ul>
-        <li>Business intelligence data processing</li>
         <li>Realtime data processing</li>
+        <li>Business intelligence data processing</li>
         <li>Video analysis and effects</li>
         <li>Decompression and decryption</li>
         <li>Image manipulating and decoding</li>

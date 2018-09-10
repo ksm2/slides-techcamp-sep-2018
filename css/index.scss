@@ -52,8 +52,8 @@
     }
   }
 
-  .hljs.hljs-19 {
-    max-height: 442px;
+  .hljs {
+    max-height: none !important;
   }
 
   .techcamp-logo {
@@ -61,8 +61,4 @@
     max-width: 50%;
     box-shadow: none;
   }
-  //
-  //.factory-background {
-  //  margin-top: -5rem;
-  //}
 }

@@ -7,8 +7,8 @@
   line-height: 5rem !important;
   background: linear-gradient(to bottom, lighten(#f27354, 20%), darken(#f27354, 10%));
   position: absolute;
-  width: 10rem;
-  top: 3rem;
+  width: 11rem;
+  top: calc(50% - 4rem);
   box-shadow: 0 5px 10px rgba(black, 0.2%);
 
   &.readable-pipe {
@@ -44,7 +44,7 @@
   }
 
   &.transform-pipe {
-    left: calc(50% - 6rem);
+    left: calc(50% - 6.5rem);
     padding-left: 1rem;
     padding-right: 1rem;
 
@@ -77,7 +77,7 @@
   top: 0.5rem;
 
   &.pipe-label-center {
-    top: 13rem;
+    top: calc(51% + 6.5rem);
     left: calc(50% - 20rem);
     width: 40rem;
   }
