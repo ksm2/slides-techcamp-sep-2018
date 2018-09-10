@@ -51,6 +51,7 @@
       <div class="shooting-star shooting-star-right"><img src="images/shooting-star.png"></div>
     </section>
 
+    <!-- The Streams API -->
     <section>
       <div class="whatwg">
         <img src="images/logo-streams.svg" class="whatwg-logo">
@@ -69,11 +70,34 @@
       </section>
 
       <section>
-        <ul>
-          <li>Reading Data</li>
-          <li>Writing Data</li>
-          <li>Transforming Data</li>
-        </ul>
+        <svg viewBox="0 0 510 80" width="51rem" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="#3c790a" />
+            </marker>
+          </defs>
+
+          <g class="fragment">
+            <rect height="77.5px" width="107.5px" x="1.25px" y="1.25px" fill="white" stroke="#3c790a" stroke-width="2.5px"></rect>
+            <text x="7.5px" y="35.0px" fill="#3c790a" font-size="25px">Reading</text>
+            <text x="27.0px" y="62.5px" fill="#3c790a" font-size="25px">Data</text>
+          </g>
+
+          <g class="fragment">
+            <rect height="77.5px" width="107.5px" x="401.25px" y="1.25px" fill="white" stroke="#3c790a" stroke-width="2.5px"></rect>
+            <text x="413.0px" y="35.0px" fill="#3c790a" font-size="25px">Writing</text>
+            <text x="427.0px" y="62.5px" fill="#3c790a" font-size="25px">Data</text>
+            <line x1="110.0px" y1="40px" x2="400px" y2="40px" stroke="#3c790a" stroke-width="2.5px" marker-end="url(#arrow)"></line>
+          </g>
+
+          <g class="fragment">
+            <rect height="77.5px" width="107.5px" x="201.25px" y="1.25px" fill="white" stroke="#3c790a" stroke-width="2.5px">
+            </rect>
+            <text x="218.0px" y="35.0px" fill="#3c790a" font-size="25px">Piping</text>
+            <text x="227.0px" y="62.5px" fill="#3c790a" font-size="25px">Data</text>
+            <line x1="110.0px" y1="40px" x2="200px" y2="40px" stroke="#3c790a" stroke-width="2.5px" marker-end="url(#arrow)"></line>
+          </g>
+        </svg>
       </section>
     </section>
 
