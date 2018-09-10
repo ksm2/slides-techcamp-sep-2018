@@ -77,6 +77,7 @@
       </section>
     </section>
 
+    <!-- Reading from Streams -->
     <section>
       <h2>Reading from Streams</h2>
 
@@ -92,10 +93,10 @@
       <section>
         <p>A <code>ReadableStream</code> …</p>
         <ul>
-          <li>is integrated into the Fetch API</li>
-          <li>has a <code>Promise</code>-based interface</li>
-          <li>mutually exclusive read</li>
-          <li>can be teed into two streams</li>
+          <li class="fragment">is integrated into the Fetch API</li>
+          <li class="fragment">has a <code>Promise</code>-based interface</li>
+          <li class="fragment">has a mutually exclusive reader</li>
+          <li class="fragment">can be teed into two streams</li>
         </ul>
       </section>
 
@@ -244,16 +245,25 @@ const rs = new ReadableStream({
       <h2>Writing to Streams</h2>
 
       <section>
-        <div class="pipe-label pipe-label-center fragment"><code>WritableStream</code></div>
         <div class="pipe-label pipe-label-right fragment">Underlying Sink</div>
         <div class="pipe writable-pipe"><span class="fragment">Writer</span></div>
+        <div class="pipe-label pipe-label-center fragment"><code>WritableStream</code></div>
         <video data-autoplay loop>
           <source src="videos/writablestream.webm" type="video/webm"/>
         </video>
       </section>
 
       <section>
-        <p>Writable Streams</p>
+        <p>A <code>WritableStream</code> …</p>
+        <ul>
+          <li class="fragment">is not natively integrated (as of today)</li>
+          <li class="fragment">also has a <code>Promise</code>-based interface</li>
+          <li class="fragment">has a mutually exclusive writer</li>
+        </ul>
+      </section>
+
+      <section>
+        <p>Creating a Custom Writable Stream</p>
         <pre><code class="hljs" data-trim>
 const ws = new WritableStream({
   /* Is called when the user starts writing to the stream */
