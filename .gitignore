@@ -16,3 +16,4 @@ plugin/**/example.*
 lib/fontawesome/*
 !lib/fontawesome/css/all.min.css
 !lib/fontawesome/webfonts/fa-brands-*
+!lib/fontawesome/webfonts/fa-solid-*
