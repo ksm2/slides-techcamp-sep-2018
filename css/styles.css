@@ -1583,9 +1583,12 @@ based on dark.css by Ivan Sagalaev
   font-weight: bold;
   margin: 3rem 0; }
 
+.reveal p.author {
+  font-size: 1.7rem; }
+
 .reveal a.social-profile {
   color: inherit;
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   margin: 0 1.5rem; }
 
 .reveal .whatwg {
@@ -1618,3 +1621,8 @@ based on dark.css by Ivan Sagalaev
 
 .reveal .hljs.hljs-19 {
   max-height: 438px; }
+
+.reveal .techcamp-logo {
+  border: none;
+  max-width: 50%;
+  box-shadow: none; }
