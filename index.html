@@ -81,25 +81,26 @@
       <h2>Reading from Streams</h2>
 
       <section>
-        <div class="pipe-label pipe-label-center fragment"><code>ReadableStream</code></div>
         <div class="pipe-label pipe-label-left fragment">Underlying Source</div>
         <div class="pipe readable-pipe"><span class="fragment">Reader</span></div>
+        <div class="pipe-label pipe-label-center fragment"><code>ReadableStream</code></div>
         <video data-autoplay loop>
           <source src="videos/readablestream.webm" type="video/webm"/>
         </video>
       </section>
 
       <section>
+        <p>A <code>ReadableStream</code> …</p>
         <ul>
-          <li>integrated into Fetch API</li>
-          <li><code>ReadableStream</code> interface</li>
-          <li>simple, <code>Promise</code>-based API</li>
-          <li>blocks others from reading</li>
+          <li>is integrated into the Fetch API</li>
+          <li>has a <code>Promise</code>-based interface</li>
+          <li>mutually exclusive read</li>
+          <li>can be teed into two streams</li>
         </ul>
       </section>
 
       <section>
-        Using <code>Promise</code> chains of ES2015
+        <p>Using <code>Promise</code> chains of ES2015</p>
         <pre><code class="hljs" data-trim data-noescape>
 function consumeStreamWithPromiseChains(url) {
   return fetch(url)                  // Fetch a URL
@@ -122,7 +123,7 @@ function consume(reader, { done, value }) {
       </section>
 
       <section>
-        Using <code>async</code> and <code>await</code> of ES2017
+        <p>Using <code>async</code> and <code>await</code> of ES2017</p>
         <pre><code class="hljs" data-trim>
 async function consumeStreamAsyncAwait(url) {
   const response = await fetch(url) // Fetch a URL
@@ -145,7 +146,7 @@ async function consumeStreamAsyncAwait(url) {
       </section>
 
       <section>
-        Using <code>AsyncIterator</code> of ES2018
+        <p>Using <code>AsyncIterator</code> of ES2018</p>
         <pre><code class="hljs" data-trim>
 async function consumeStreamAsyncIterator(url) {
   const response = await fetch(url)         // Fetch a URL
@@ -162,7 +163,7 @@ async function consumeStreamAsyncIterator(url) {
       </section>
 
       <section>
-        Implementation of <code>streamAsyncIterator</code>
+        <p>Implementation of <code>streamAsyncIterator</code></p>
         <pre><code class="hljs" data-trim>
 async function* streamAsyncIterator(rs) {
   // Get a lock on the stream
@@ -182,6 +183,29 @@ async function* streamAsyncIterator(rs) {
   }
 }
         </code></pre>
+      </section>
+
+      <section>
+        <p>Creating a Custom Readable Stream</p>
+        <pre><code class="hljs" data-trim>
+const rs = new ReadableStream({
+  /* Is called when the consumer locks the stream */
+  async start(ctrl: ReadableStreamDefaultController): Promise&lt;void&gt; {
+    try {
+      ctrl.enqueue(chunk)  // Enqueue a new chunk in the stream
+      ctrl.close()         // Tell the consumer we have sent all chunks
+    } catch (err) {
+      ctrl.error(err)      // Forward-propagate an error
+    }
+  },
+
+  /* Is called when the consumer waits for data */
+  async pull(ctrl: ReadableStreamDefaultController): Promise&lt;void&gt; {},
+
+  /* Handle back-propagated errors */
+  async cancel(reason: any): Promise&lt;void&gt; {},
+})
+      </code></pre>
       </section>
 
       <section>
@@ -213,29 +237,6 @@ async function* streamAsyncIterator(rs) {
           <small>https://webkit.org/status/#feature-readable-streams</small>
         </p>
       </section>
-    </section>
-
-    <section>
-      <h2>Creating a Readable Stream</h2>
-      <pre><code class="hljs" data-trim>
-const rs = new ReadableStream({
-  /* Is called when the consumer locks the stream */
-  async start(ctrl: ReadableStreamDefaultController): Promise&lt;void&gt; {
-    try {
-      ctrl.enqueue(chunk)  // Enqueue a new chunk in the stream
-      ctrl.close()         // Tell the consumer we have sent all chunks
-    } catch (err) {
-      ctrl.error(err)      // Forward-propagate an error
-    }
-  },
-
-  /* Is called when the consumer waits for data */
-  async pull(ctrl: ReadableStreamDefaultController): Promise&lt;void&gt; {},
-
-  /* Handle back-propagated errors */
-  async cancel(reason: any): Promise&lt;void&gt; {},
-})
-      </code></pre>
     </section>
 
     <!-- Writing to Streams -->
