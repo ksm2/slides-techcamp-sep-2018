@@ -187,7 +187,7 @@ async function* streamAsyncIterator(rs) {
       </section>
 
       <section>
-        <p>Creating a Custom Readable Stream</p>
+        <p>Creating Custom Readable Streams</p>
         <pre><code class="hljs" data-trim>
 const rs = new ReadableStream({
   /* Is called when the consumer locks the stream */
@@ -263,7 +263,7 @@ const rs = new ReadableStream({
       </section>
 
       <section>
-        <p>Creating a Custom Writable Stream</p>
+        <p>Creating Custom Writable Streams</p>
         <pre><code class="hljs" data-trim>
 const ws = new WritableStream({
   /* Is called when the user starts writing to the stream */
@@ -366,7 +366,16 @@ async function examplePipingTo() {
       </section>
 
       <section>
-        <p>Transform Streams</p>
+        <p>A <code>TransformStream</code> …</p>
+        <ul>
+          <li class="fragment">will be integrated into the Encoder API</li>
+          <li class="fragment">allows piping of readable streams</li>
+          <li class="fragment">used to create a writable and readable stream pair</li>
+        </ul>
+      </section>
+
+      <section>
+        <p>Creating Custom Transform Streams</p>
         <pre><code class="hljs hljs-19" data-trim>
 const ts = new TransformStream({
   /* Is called when the user starts to transform */
@@ -383,19 +392,11 @@ const ts = new TransformStream({
       </section>
 
       <section>
-        <p>Using <code>pipeThrough</code> with Transform Streams</p>
-        <pre><code class="hljs" data-trim>
-async function examplePipeThrough() {
-}
-        </code></pre>
-      </section>
-
-      <section>
         <p>Using Identity Transform Streams</p>
         <pre><code class="hljs" data-trim>
 function fetchUploadStreamed() {
   // Create an identity transform stream and get its
-  // readable and writable streams
+  // readable and writable stream pair
   const { writable, readable } = new TransformStream()
 
   // Link the uploaded body with the readable stream
@@ -405,6 +406,29 @@ function fetchUploadStreamed() {
   const writer = writable.getWriter()
   writer.write(new Uint8Array([0x73, 0x74, 0x72, 0x65, /* ... */]))
   writer.close()
+}
+        </code></pre>
+      </section>
+
+      <section>
+        <p>Using <code>pipeThrough</code> with Transform Streams</p>
+        <pre><code class="hljs" data-trim>
+async function examplePipeThrough() {
+  // Create a transform stream to parse Uint8Arrays to single bytes
+  const transformStream = new TransformStream({
+    transform(chunk, ctrl) {
+      chunk.forEach(byte => ctrl.enqueue(byte))
+    }
+  })
+
+  // Get a readable stream
+  const response = await fetch('...')
+  const readableStream = response.body
+
+  // Pipe it trough our transform stream
+  const byteStream = readableStream.pipeTrough(transformStream)
+
+  /* ... */
 }
         </code></pre>
       </section>
@@ -433,6 +457,27 @@ function fetchUploadStreamed() {
         <p hidden>
           <small>https://www.chromestatus.com/feature/5466425791610880</small>
         </p>
+      </section>
+
+      <section>
+        <p>Outlook: Using a <code>TextDecoderStream</code></p>
+        <pre><code class="hljs" data-trim>
+async function exampleTextDecoding() {
+  // Create a text decoder transform stream to decode Uint8Arrays
+  // to UTF-8 strings
+  const transformStream = new TextDecoderStream('utf-8')
+
+  // Get a readable stream
+  const response = await fetch('...')
+  const readableStream = response.body
+
+  // Pipe it trough our transform stream
+  const stringStream = readableStream.pipeTrough(transformStream)
+
+  /* ... */
+}
+        </code></pre>
+        <small>Will come with Chrome 71 and Opera 58</small>
       </section>
     </section>
 
@@ -469,8 +514,8 @@ function fetchUploadStreamed() {
         src: 'plugin/highlight/highlight.js', async: true, callback: function () {
           const js = hljs.getLanguage('js')
           js.k.keyword = `${js.k.keyword} any`
-          js.k.built_in = `${js.k.built_in} fetch WebSocket ReadableStream ReadableStreamDefaultController WritableStream WritableStreamDefaultController TransformStream TransformStreamDefaultController`
-          js.k.param = `url protocols resolve reject code reasonString done value reader writer readable writable ctrl chunk reason next rs ws ts response iterator byteArray err socket`
+          js.k.built_in = `${js.k.built_in} fetch WebSocket ReadableStream ReadableStreamDefaultController WritableStream WritableStreamDefaultController TransformStream TransformStreamDefaultController TextDecoderStream`
+          js.k.param = `url protocols resolve reject code reasonString done value reader writer readable writable ctrl chunk reason next rs ws ts readableStream byteStream stringStream transformStream response iterator byteArray err socket`
 
           hljs.initHighlightingOnLoad()
         },
