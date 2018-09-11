@@ -1724,8 +1724,14 @@ based on dark.css by Ivan Sagalaev
   max-height: 6rem;
   margin: 0; }
 
+.reveal .techcamp-info {
+  font-size: 1.7rem;
+  margin-bottom: 2rem; }
+
 .reveal .techcamp-logo {
-  max-width: 50%; }
+  max-width: 45%;
+  display: block;
+  margin: 0 auto -1rem; }
 
 .reveal .baqend-logo {
   height: 6rem;

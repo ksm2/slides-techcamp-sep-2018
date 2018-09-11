@@ -68,8 +68,15 @@
     margin: 0;
   }
 
+  .techcamp-info {
+    font-size: 1.7rem;
+    margin-bottom: 2rem;
+  }
+
   .techcamp-logo {
-    max-width: 50%;
+    max-width: 45%;
+    display: block;
+    margin: 0 auto -1rem;
   }
 
   $baqend-logo-height: 6rem;
