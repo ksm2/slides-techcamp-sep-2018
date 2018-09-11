@@ -22,6 +22,8 @@
 <body>
 <div class="reveal">
   <div class="slides">
+
+    <!-- Title -->
     <section>
       <h1>Enhancing Data Processing in Browsers Using Streams</h1>
       <video data-autoplay autoplay loop>
@@ -106,6 +108,30 @@
           </g>
         </svg>
       </section>
+    </section>
+
+    <!-- Enabled Use Cases -->
+    <section data-background="images/factory.jpg" class="factory-background">
+      <h2>Enabled Use Cases</h2>
+      <ul>
+        <li>Realtime data processing</li>
+        <li>Edge Side Includes</li>
+        <li>Video analysis and effects</li>
+        <li>Decompression and decryption</li>
+        <li>Image manipulating and decoding</li>
+      </ul>
+      <br>
+      <br>
+
+      <aside class="notes">
+        <ul>
+          <li><strong>Realtime:</strong> Have a WebSocket stream to a stocks providing server and receive its data using a stream.</li>
+          <li><strong>Edge Side Includes:</strong> Have multiple HTML documents streamed into a single document.</li>
+          <li><strong>Videos:</strong> Add effects to each loaded video frames.</li>
+          <li><strong>Decompression:</strong> Unpack gzipped documents on the fly with every data chunk.</li>
+          <li><strong>Image manipulating:</strong> Polyfill new image formats for the browser while keeping performance, as shown in demo.</li>
+        </ul>
+      </aside>
     </section>
 
     <!-- Reading from Streams -->
@@ -276,7 +302,7 @@ const rs = new ReadableStream({
       <h2>Writing to Streams</h2>
 
       <section>
-        <div class="pipe-label pipe-label-right fragment">Underlying Sink</div>
+        <div class="pipe-label pipe-label-right fragment">Arbitrary Underlying Sink</div>
         <div class="pipe writable-pipe"><span class="fragment">Writer</span></div>
         <div class="pipe-label pipe-label-center fragment"><code>WritableStream</code></div>
         <video data-autoplay loop>
@@ -510,20 +536,6 @@ async function exampleTextDecoding() {
         </code></pre>
         <small>Will come with Chrome 71 and Opera 58</small>
       </section>
-    </section>
-
-    <section data-background="images/factory.jpg" class="factory-background">
-      <h2>Enabled Use Cases</h2>
-      <ul>
-        <li>Realtime data processing</li>
-        <li>Business intelligence data processing</li>
-        <li>Video analysis and effects</li>
-        <li>Decompression and decryption</li>
-        <li>Image manipulating and decoding</li>
-        <li>Edge Side Includes</li>
-      </ul>
-      <br>
-      <br>
     </section>
 
     <section>
