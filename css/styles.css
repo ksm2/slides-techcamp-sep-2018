@@ -1648,6 +1648,29 @@ based on dark.css by Ivan Sagalaev
   .pipe-label.pipe-label-right {
     right: 7rem; }
 
+.reveal .columns {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
+  -ms-flex-pack: justify;
+      justify-content: space-between; }
+
+.reveal .column {
+  -ms-flex-preferred-size: 5rem;
+      flex-basis: 5rem;
+  -ms-flex-positive: 1;
+      flex-grow: 1;
+  padding: 0 2rem;
+  font-size: 1.6rem; }
+
+.reveal .column-header {
+  display: block;
+  margin: 0 auto 20px !important;
+  border: none !important;
+  box-shadow: none !important;
+  height: 14rem; }
+
 .reveal p.subtitle {
   color: #808080;
   font-weight: bold;

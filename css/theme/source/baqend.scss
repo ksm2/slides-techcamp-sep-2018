@@ -31,6 +31,7 @@ $selectionBackgroundColor: lighten($linkColor, 25%);
 $heading1Size: 1.8em;
 $heading2Size: 1.6em;
 $heading3Size: 1.3em;
+$heading3Color: $mainColor;
 $heading4Size: 1.0em;
 
 .reveal.has-dark-background {
@@ -69,4 +70,9 @@ $heading4Size: 1.0em;
 
 .reveal li {
   line-height: 1.5;
+}
+
+.reveal h3 {
+  color: $heading3Color;
+  font-weight: normal;
 }
