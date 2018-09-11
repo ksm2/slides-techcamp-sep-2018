@@ -56,9 +56,52 @@
     max-height: none !important;
   }
 
-  .techcamp-logo {
+  .techcamp-logo, .baqend-logo, .qrcode {
     border: none;
-    max-width: 50%;
+    background: none;
     box-shadow: none;
+  }
+
+  .qrcode {
+    max-height: 6rem;
+    margin: 0;
+  }
+
+  .techcamp-logo {
+    max-width: 50%;
+  }
+
+  $baqend-logo-height: 6rem;
+  $baqend-logo-line: $baqend-logo-height * 0.5732;
+  $baqend-logo-padding-top: $baqend-logo-height * 0.16;
+  $baqend-logo-padding-bottom: $baqend-logo-height - $baqend-logo-line - $baqend-logo-padding-top;
+
+  .baqend-logo {
+    height: 6rem;
+    margin: 0;
+  }
+
+  p.baqend-logo-line {
+    margin-top: 40px;
+
+    &, a, span {
+      line-height: $baqend-logo-height;
+    }
+
+    a {
+      float: right;
+    }
+
+    .baqend-logo {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .qrcode {
+      display: inline;
+      vertical-align: middle;
+      width: $baqend-logo-height;
+      height: $baqend-logo-height;
+    }
   }
 }

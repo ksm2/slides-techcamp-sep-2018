@@ -1692,7 +1692,33 @@ based on dark.css by Ivan Sagalaev
 .reveal .hljs {
   max-height: none !important; }
 
-.reveal .techcamp-logo {
+.reveal .techcamp-logo, .reveal .baqend-logo, .reveal .qrcode {
   border: none;
-  max-width: 50%;
+  background: none;
   box-shadow: none; }
+
+.reveal .qrcode {
+  max-height: 6rem;
+  margin: 0; }
+
+.reveal .techcamp-logo {
+  max-width: 50%; }
+
+.reveal .baqend-logo {
+  height: 6rem;
+  margin: 0; }
+
+.reveal p.baqend-logo-line {
+  margin-top: 40px; }
+  .reveal p.baqend-logo-line, .reveal p.baqend-logo-line a, .reveal p.baqend-logo-line span {
+    line-height: 6rem; }
+  .reveal p.baqend-logo-line a {
+    float: right; }
+  .reveal p.baqend-logo-line .baqend-logo {
+    display: inline-block;
+    vertical-align: middle; }
+  .reveal p.baqend-logo-line .qrcode {
+    display: inline;
+    vertical-align: middle;
+    width: 6rem;
+    height: 6rem; }
