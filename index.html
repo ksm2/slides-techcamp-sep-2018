@@ -229,22 +229,37 @@ async function* streamAsyncIterator(rs) {
       <section>
         <p>Creating Custom Readable Streams</p>
         <pre><code class="hljs" data-trim>
+interface ReadableStream {
+  /* Is called when the consumer locks the stream */
+  start(ctrl: ReadableStreamDefaultController): Promise&lt;void&gt;
+
+  /* Is called when the consumer waits for data */
+  pull(ctrl: ReadableStreamDefaultController): Promise&lt;void&gt;
+
+  /* Handle back-propagated errors */
+  cancel(reason: any): Promise&lt;void&gt;
+}
+      </code></pre>
+      </section>
+
+      <section>
+        <p>Creating Custom Readable Streams</p>
+        <pre><code class="hljs" data-trim>
 const rs = new ReadableStream({
   /* Is called when the consumer locks the stream */
   async start(ctrl: ReadableStreamDefaultController): Promise&lt;void&gt; {
     try {
-      ctrl.enqueue(chunk)  // Enqueue a new chunk in the stream
+      ctrl.enqueue(chunk1)  // Enqueue a new chunk in the stream
+      ctrl.enqueue(chunk2)
+      ctrl.enqueue(chunk3)
+
+      /* ... */
+
       ctrl.close()         // Tell the consumer we have sent all chunks
     } catch (err) {
       ctrl.error(err)      // Forward-propagate an error
     }
   },
-
-  /* Is called when the consumer waits for data */
-  async pull(ctrl: ReadableStreamDefaultController): Promise&lt;void&gt; {},
-
-  /* Handle back-propagated errors */
-  async cancel(reason: any): Promise&lt;void&gt; {},
 })
       </code></pre>
       </section>
@@ -679,7 +694,7 @@ async function exampleTextDecoding() {
       {
         src: 'plugin/highlight/highlight.js', async: true, callback: function () {
           const js = hljs.getLanguage('js')
-          js.k.keyword = `${js.k.keyword} any`
+          js.k.keyword = `${js.k.keyword} any interface`
           js.k.built_in = `${js.k.built_in} fetch WebSocket ReadableStream ReadableStreamDefaultController WritableStream WritableStreamDefaultController TransformStream TransformStreamDefaultController TextDecoderStream`
           js.k.param = `url protocols resolve reject code reasonString done value reader writer readable writable ctrl chunk reason next rs ws ts readableStream byteStream stringStream transformStream response iterator byteArray err socket`
 
